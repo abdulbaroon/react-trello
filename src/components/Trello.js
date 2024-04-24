@@ -9,6 +9,7 @@ import { getDatabase, onValue, ref, set } from 'firebase/database'
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { app } from '@/firebase-config/firebase-methords'
 import { AuthContext } from '@/context/auth-context'
+import { backgroundSvg } from '@/assets'
 
 const trelloData = {
   "lanes": [
@@ -175,8 +176,8 @@ const Trello = () => {
     console.log("Sdf")
     replace(`${pathname}`)
   }
-  const handleEdit = (laneId,cardId,title) => {
-    console.log(laneId,title,"sad")
+  const handleEdit = (laneId, cardId, title) => {
+    console.log(laneId, title, "sad")
     // completeCard()
     eventBus.publish(
       {
@@ -193,10 +194,15 @@ const Trello = () => {
 
   return (
     <>
-      <div className='text-white' onClick={completeCard}>Trello</div>
       <EditModal isOpen={modalOpen} onClose={handleClose} onChangeTrello={handleEdit} />
       {trelloLane ?
         <Board
+          style={{
+            backgroundColor: '#111827',
+            backgroundImage:`url(${backgroundSvg.src})`,
+            backgroundSize: "100%",
+            backgroundRepeat: "no-repeat",
+          }} 
           editable
           data={
             trelloLane
@@ -210,7 +216,7 @@ const Trello = () => {
           eventBusHandle={setEventBus}
           components={{
             AddCardLink: CustomAddCard,
-            NewCardForm: NewCardForm  
+            NewCardForm: NewCardForm
           }}
         // collapsibleLanes
         // onBeforeCardDelete={() => console.log("deleted")}

@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'react-quill/dist/quill.snow.css'
 import { AuthProvider } from "@/context/auth-context";
+import { Toaster } from "sonner";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider> 
+        <Toaster position="top-right" />
+        <AuthProvider>
           {children}
         </AuthProvider>
       </body>

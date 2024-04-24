@@ -52,6 +52,8 @@ export const userStateListener = (callback) => {
 };
 
 export const SignOutUser = async () => {
-  return await signOut(auth);
+  return await signOut(auth).then((s)=>{
+    console.log(s,"out");
+  });
 };
 

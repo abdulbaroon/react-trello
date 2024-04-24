@@ -5,7 +5,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { SignOutUser, app, userStateListener } from "@/firebase-config/firebase-methords";
 
 export const AuthContext = createContext({
-  currentUser: null,
+  currentUser: {},
   setCurrentUser: (_user) => {},
   signOut: () => {},
 });
@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = userStateListener((user) => {
+      console.log(user)
       if (user) {
         setCurrentUser(user);
         sessionStorage.setItem("user", "true");
@@ -27,11 +28,11 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const signOut = () => {
-    SignOutUser();
+  const signOut =() => {
+     SignOutUser()
     setCurrentUser(null);
     sessionStorage.removeItem("user");
-    navigate.push('Login');
+    navigate.push('login');
   };
 
   const value = {
